@@ -1,6 +1,7 @@
 import { pgTable, serial, text, timestamp, numeric } from 'drizzle-orm/pg-core';
 import { customType } from 'drizzle-orm/pg-core';
- 
+import { relations } from 'drizzle-orm';
+
 export const vector = customType<{
 	data: number[];
 	driverData: string;
@@ -21,26 +22,28 @@ export const vector = customType<{
 	},
 });
 
-// Tabel "documents"
+// Table "documents"
 export const documents = pgTable('documents', {
   id: serial('id').primaryKey(),
   nameStudent: text('nameStudent').notNull(),
   documentName: text('documentName').notNull(),
   documentUrl: text('documentUrl').notNull(),
-  folder: text('folder').notNull(),
+  folder: text('folder'),
   uploadedDate: timestamp('uploadedDate', { withTimezone: true }).defaultNow(),
-  embedding: vector('embedding', { size: 384 })
+  embedding: vector('embedding', { size: 384 }),
+  // classId: numeric('classId'),
+  // folderId: numeric('folderId')
 });
 
-// Tabel "classes"
+// Table "classes"
 export const classes = pgTable('classes', {
   id: serial('id').primaryKey(), 
-  createdAt: timestamp('createdAt', { withTimezone: true }).notNull().defaultNow(),
+  createdAt: timestamp('createdAt', { withTimezone: true }).defaultNow(),
   className: text('className').notNull(),
   totalStudent: numeric('totalStudent').notNull(),
 });
 
-// Tabel "folders"
+// Table "folders"
 export const folders = pgTable('folders', {
   id: serial('id').primaryKey(),
   nameAssignment: text('nameAssignment').notNull(),
@@ -50,3 +53,11 @@ export const folders = pgTable('folders', {
   description: text('description'),
   assignmentType: text('assignmentType'),
 });
+
+// Relations for documents
+export const documentsRelations = relations(documents, ({ one }) => ({
+  folder: one(folders, {
+    fields: [documents.folder],
+    references: [folders.nameAssignment]
+  })
+}));

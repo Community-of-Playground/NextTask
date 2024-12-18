@@ -29,6 +29,27 @@
       "when": 1734376629614,
       "tag": "0003_crazy_bloodstorm",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1734450879999,
+      "tag": "0004_gifted_eddie_brock",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1734450939617,
+      "tag": "0005_violet_ben_urich",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1734460705304,
+      "tag": "0006_skinny_mariko_yashida",
+      "breakpoints": true
     }
   ]
 }

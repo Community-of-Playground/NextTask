@@ -25,25 +25,20 @@ const data = {
   },
   navMain: [
     {
+      title: "Assignment",
+      url: "/assignment",
+      icon: Bot,
+    },
+    {
       title: "document-ai",
       url: "/document-ai",
       icon: SquareTerminal,
     },
     {
-      title: "Models",
-      url: "/models",
-      icon: Bot,
-    },
-    {
-      title: "Documentation",
-      url: "/documentation",
+      title: "Classes",
+      url: "/classes",
       icon: BookOpen,
-    },
-    {
-      title: "Settings",
-      url: "/settings",
-      icon: Settings2,
-    },
+    }
   ],
 }
 
