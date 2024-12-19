@@ -2,182 +2,184 @@
 
 import { Button } from "@/components/ui/button";
 import {
-NavigationMenu,
-NavigationMenuContent,
-NavigationMenuItem,
-NavigationMenuLink,
-NavigationMenuList,
-NavigationMenuTrigger,
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Menu, MoveRight, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
-import Logo  from "@/components/Logo";
+import Logo from "@/components/Logo";
+import { ThemeSwitcher } from "@/app/ThemeSwitcher";
 
 export const Header1 = () => {
-const navigationItems = [
+  const navigationItems = [
     {
-    title: "Home",
-    href: "/",
-    description: "",
+      title: "Home",
+      href: "/",
+      description: "",
     },
     {
-    title: "Product",
-    description: "Managing a small business today is already tough.",
-    items: [
+      title: "Product",
+      description: "Managing a small business today is already tough.",
+      items: [
         {
-        title: "Reports",
-        href: "/reports",
+          title: "Reports",
+          href: "/reports",
         },
         {
-        title: "Statistics",
-        href: "/statistics",
+          title: "Statistics",
+          href: "/statistics",
         },
         {
-        title: "Dashboards",
-        href: "/dashboards",
+          title: "Dashboards",
+          href: "/dashboards",
         },
         {
-        title: "Recordings",
-        href: "/recordings",
+          title: "Recordings",
+          href: "/recordings",
         },
-    ],
+      ],
     },
     {
-    title: "Company",
-    description: "Managing a small business today is already tough.",
-    items: [
+      title: "Company",
+      description: "Managing a small business today is already tough.",
+      items: [
         {
-        title: "About us",
-        href: "/about",
+          title: "About us",
+          href: "/about",
         },
         {
-        title: "Fundraising",
-        href: "/fundraising",
+          title: "Fundraising",
+          href: "/fundraising",
         },
         {
-        title: "Investors",
-        href: "/investors",
+          title: "Investors",
+          href: "/investors",
         },
         {
-        title: "Contact us",
-        href: "/contact",
+          title: "Contact us",
+          href: "/contact",
         },
-    ],
+      ],
     },
-];
+  ];
 
-const [isOpen, setOpen] = useState(false);
-return (
-    <header className="w-full z-40 fixed top-0 left-0 bg-background">
-    <div className="container relative mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center">
-        <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
-        <NavigationMenu className="flex justify-start items-start">
-            <NavigationMenuList className="flex justify-start gap-4 flex-row">
-            <Logo/>
-            {navigationItems.map((item) => (
+  const [isOpen, setOpen] = useState(false);
+  return (
+    <header className="fixed left-0 top-0 z-40 w-full bg-background">
+      <div className="container relative mx-auto flex min-h-20 flex-row items-center gap-4 lg:grid lg:grid-cols-3">
+        <div className="hidden flex-row items-center justify-start gap-4 lg:flex">
+          <NavigationMenu className="flex items-start justify-start">
+            <NavigationMenuList className="flex flex-row justify-start gap-4">
+              <Logo />
+              {navigationItems.map((item) => (
                 <NavigationMenuItem key={item.title}>
-                {item.href ? (
+                  {item.href ? (
                     <>
-                    <NavigationMenuLink>
+                      <NavigationMenuLink>
                         <Button variant="ghost">{item.title}</Button>
-                    </NavigationMenuLink>
+                      </NavigationMenuLink>
                     </>
-                ) : (
+                  ) : (
                     <>
-                    <NavigationMenuTrigger className="font-medium text-sm">
+                      <NavigationMenuTrigger className="text-sm font-medium">
                         {item.title}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="!w-[450px] p-4">
-                        <div className="flex flex-col lg:grid grid-cols-2 gap-4">
-                        <div className="flex flex-col h-full justify-between">
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="!w-[450px] p-4">
+                        <div className="flex grid-cols-2 flex-col gap-4 lg:grid">
+                          <div className="flex h-full flex-col justify-between">
                             <div className="flex flex-col">
-                            <p className="text-base">{item.title}</p>
-                            <p className="text-muted-foreground text-sm">
+                              <p className="text-base">{item.title}</p>
+                              <p className="text-sm text-muted-foreground">
                                 {item.description}
-                            </p>
+                              </p>
                             </div>
                             <Button size="sm" className="mt-10">
-                            Book a call today
+                              Book a call today
                             </Button>
-                        </div>
-                        <div className="flex flex-col text-sm h-full justify-end">
+                          </div>
+                          <div className="flex h-full flex-col justify-end text-sm">
                             {item.items?.map((subItem) => (
-                            <NavigationMenuLink
+                              <NavigationMenuLink
                                 href={subItem.href}
                                 key={subItem.title}
-                                className="flex flex-row justify-between items-center hover:bg-muted py-2 px-4 rounded"
-                            >
+                                className="flex flex-row items-center justify-between rounded px-4 py-2 hover:bg-muted"
+                              >
                                 <span>{subItem.title}</span>
-                                <MoveRight className="w-4 h-4 text-muted-foreground" />
-                            </NavigationMenuLink>
+                                <MoveRight className="h-4 w-4 text-muted-foreground" />
+                              </NavigationMenuLink>
                             ))}
+                          </div>
                         </div>
-                        </div>
-                    </NavigationMenuContent>
+                      </NavigationMenuContent>
                     </>
-                )}
+                  )}
                 </NavigationMenuItem>
-            ))}
+              ))}
+              <NavigationMenuItem>
+                <NavigationMenuLink className="!w-[450px] p-4">
+                  <ThemeSwitcher />
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
-        </NavigationMenu>
+          </NavigationMenu>
         </div>
-        <div className="flex lg:justify-center">
-        {/* <Logo/> */}
-        </div>
-        <div className="flex justify-end w-full gap-4">
-        <Button variant="ghost" className="hidden md:inline">
+        <div className="flex lg:justify-center">{/* <Logo/> */}</div>
+        <div className="flex w-full justify-end gap-4">
+          <Button variant="ghost" className="hidden md:inline">
             Book a demo
-        </Button>
-        <div className="border-r hidden md:inline"></div>
-        <Button variant="outline">
+          </Button>
+          <div className="hidden border-r md:inline"></div>
+          <Button variant="outline">
             <Link href="/dashboard">Sign in </Link>
-        </Button>
-        <Button>
+          </Button>
+          <Button>
             <Link href="/dashboard">Get started </Link>
-        </Button>
-        
+          </Button>
         </div>
-        <div className="flex w-12 shrink lg:hidden items-end justify-end">
-        <Button variant="ghost" onClick={() => setOpen(!isOpen)}>
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </Button>
-        {isOpen && (
-            <div className="absolute top-20 border-t flex flex-col w-full right-0 bg-background shadow-lg py-4 container gap-8">
-            {navigationItems.map((item) => (
+        <div className="flex w-12 shrink items-end justify-end lg:hidden">
+          <Button variant="ghost" onClick={() => setOpen(!isOpen)}>
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+          {isOpen && (
+            <div className="container absolute right-0 top-20 flex w-full flex-col gap-8 border-t bg-background py-4 shadow-lg">
+              {navigationItems.map((item) => (
                 <div key={item.title}>
-                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2">
                     {item.href ? (
-                    <Link
+                      <Link
                         href={item.href}
-                        className="flex justify-between items-center"
-                    >
+                        className="flex items-center justify-between"
+                      >
                         <span className="text-lg">{item.title}</span>
-                        <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
-                    </Link>
+                        <MoveRight className="h-4 w-4 stroke-1 text-muted-foreground" />
+                      </Link>
                     ) : (
-                    <p className="text-lg">{item.title}</p>
+                      <p className="text-lg">{item.title}</p>
                     )}
-                    {item.items &&
-                    item.items.map((subItem) => (
-                        <Link
+                    {item.items?.map((subItem) => (
+                      <Link
                         key={subItem.title}
                         href={subItem.href}
-                        className="flex justify-between items-center"
-                        >
+                        className="flex items-center justify-between"
+                      >
                         <span className="text-muted-foreground">
-                            {subItem.title}
+                          {subItem.title}
                         </span>
-                        <MoveRight className="w-4 h-4 stroke-1" />
-                        </Link>
+                        <MoveRight className="h-4 w-4 stroke-1" />
+                      </Link>
                     ))}
+                  </div>
                 </div>
-                </div>
-            ))}
+              ))}
             </div>
-        )}
+          )}
         </div>
-    </div>
+      </div>
     </header>
-);
+  );
 };
