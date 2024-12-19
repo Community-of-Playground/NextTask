@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { usePathname } from "next/navigation"
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react"
-import { SearchForm } from "@/components/search-form"
-import { NavMain } from "@/components/nav-main"
+import * as React from "react";
+import { usePathname } from "next/navigation";
+import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
+import { SearchForm } from "@/components/search-form";
+import { NavMain } from "@/components/nav-main";
 import {
   Sidebar,
   SidebarContent,
@@ -13,9 +13,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import Logo from "./Logo"
-import { SidebarOptInForm } from "./sidebar-opt-in-form"
+} from "@/components/ui/sidebar";
+import Logo from "./Logo";
+import { SidebarOptInForm } from "./sidebar-opt-in-form";
+import { ThemeSwitcher } from "@/app/ThemeSwitcher";
 
 const data = {
   user: {
@@ -38,26 +39,27 @@ const data = {
       title: "Classes",
       url: "/classes",
       icon: BookOpen,
-    }
+    },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
-        <SidebarMenu className="py-2 ml-2">
-          <SidebarMenuItem>
+        <SidebarMenu className="ml-2 py-2">
+          <SidebarMenuItem className="flex items-center justify-between">
             <SidebarMenuButton size="lg" asChild>
-              <Logo/>
+              <Logo />
             </SidebarMenuButton>
+            <ThemeSwitcher />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SearchForm className="py-2"/>
+        <SearchForm className="py-2" />
         <NavMain
           items={data.navMain.map((item) => ({
             ...item,
@@ -68,5 +70,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarOptInForm />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
