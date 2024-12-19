@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { ChevronRight, type LucideIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -18,31 +18,31 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
-import Logo from "./Logo"
+} from "@/components/ui/sidebar";
+import Logo from "./Logo";
 
 export function NavMain({
   items,
 }: {
   items: {
-    title: string
-    url: string
-    icon: LucideIcon
-    isActive?: boolean
+    title: string;
+    url: string;
+    icon: LucideIcon;
+    isActive?: boolean;
     items?: {
-      title: string
-      url: string
-    }[]
-  }[]
+      title: string;
+      url: string;
+    }[];
+  }[];
 }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <SidebarGroup>
       {/* <SidebarGroupLabel>Platform</SidebarGroupLabel> */}
       <SidebarMenu>
         {items.map((item) => {
-          const isActive = pathname === item.url
+          const isActive = pathname === item.url;
           return (
             <Collapsible key={item.title} asChild defaultOpen={isActive}>
               <SidebarMenuItem>
@@ -50,7 +50,9 @@ export function NavMain({
                   asChild
                   tooltip={item.title}
                   className={`${
-                    isActive ? "text-black font-medium border bg-white p-4" : "text-black/50 font-normal py-4"
+                    isActive
+                      ? "border bg-white p-4 font-medium text-black"
+                      : "py-4 font-normal text-black/50 dark:text-white"
                   }`}
                 >
                   <a href={item.url}>
@@ -83,9 +85,9 @@ export function NavMain({
                 ) : null}
               </SidebarMenuItem>
             </Collapsible>
-          )
+          );
         })}
       </SidebarMenu>
     </SidebarGroup>
-  )
+  );
 }
